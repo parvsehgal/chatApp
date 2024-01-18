@@ -1,0 +1,18 @@
+.registerWrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 10%;
+}
+
+.regForm {
+  background-color: wheat;
+  display: flex;
+  flex-direction: column;
+  padding: 20px;
+  height: 200px;
+  width: 200px;
+}
+.registerSpan {
+  margin-top: 10px;
+}

@@ -2,10 +2,12 @@ const express = require("express");
 const app = express();
 const cors = require("cors");
 const mongoose = require("mongoose");
+const userRoutes = require("./routes/userRoutes");
 require("dotenv").config();
 app.use(cors());
 app.use(express.json());
-//app.use("/api/v1", testRoute);
+app.use("/api/v1", userRoutes);
+
 mongoose
   .connect("mongodb://127.0.0.1:27017/userdb", {
     useUnifiedTopology: true,
