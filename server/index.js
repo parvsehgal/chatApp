@@ -9,7 +9,7 @@ app.use(express.json());
 app.use("/api/v1", userRoutes);
 
 mongoose
-  .connect("mongodb://127.0.0.1:27017/userdb", {
+  .connect(process.env.MONGO_URL, {
     useUnifiedTopology: true,
     useNewUrlParser: true,
   })

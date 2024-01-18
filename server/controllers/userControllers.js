@@ -24,3 +24,29 @@ exports.registerController = async (req, res) => {
     res.json({ msg: "error Registering ", stat: 500 });
   }
 };
+
+exports.loginController = async (req, res) => {
+  try {
+    const { name, password } = req.body;
+    const doesUser = await User.findOne({ name: name });
+    if (doesUser) {
+      console.log(doesUser);
+      const isPasswordCorrect = await bcrypt.compare(
+        password,
+        doesUser.password
+      );
+      if (isPasswordCorrect) {
+        res.json({ msg: "login sucessfull", status: 200 });
+        return;
+      } else {
+        res.json({ msg: "incorrect password", status: 500 });
+        return;
+      }
+    }
+    res.json({ msg: "username or password incorrect", status: 500 });
+    return;
+  } catch (err) {
+    console.log(err.message);
+    res.json({ msg: "error loggin in", status: 500 });
+  }
+};
