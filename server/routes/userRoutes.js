@@ -9,7 +9,7 @@ const {
 
 router.post("/register", registerController);
 router.post("/login", loginController);
-router.get("/allContacts", getAllContacts);
+router.post("/allContacts", getAllContacts);
 
 
 module.exports = router;

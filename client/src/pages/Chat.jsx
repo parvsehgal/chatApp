@@ -15,10 +15,14 @@ export default function Chat() {
     setCurrUser(JSON.parse(localStorage.getItem("currUser")))
   }, [])
 
+  const getUsers = async () => {
+    const response = await axios.post(contactsApi, currUser);
+    console.log(response.data.users)
+  }
+
   useEffect(() => {
     //api call
-    const response = axios.get(`${contactsApi}`);
-    console.log(response.data)
+    getUsers();
   }, [currUser])
 
   return (

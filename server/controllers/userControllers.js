@@ -56,10 +56,10 @@ exports.loginController = async (req, res) => {
 
 exports.getAllContacts = async (req, res) => {
   try {
-    //const { _id } = req.body;
+    const { _id } = req.body
+    const contacts = await User.find({ _id: { $ne: _id } })
     console.log(_id)
-    const contacts = await User.find()
-    res.json(contacts)
+    res.json({ msg: "records of all users", users: contacts })
   } catch (err) {
     console.log(err.message)
   }
