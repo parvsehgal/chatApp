@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { registerAPi } from "../utils/api";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
@@ -12,6 +12,13 @@ export default function Register() {
     password: "",
     confirmPassword: "",
   });
+
+  useEffect(() => {
+    const isUser = localStorage.getItem("currUser")
+    if (isUser) {
+      navigator("/")
+    }
+  }, [])
 
   const changeHandler = (e) => {
     const { name, value } = e.target;
@@ -32,8 +39,11 @@ export default function Register() {
     }
     const response = await axios.post(registerAPi, form);
     console.log(response.data.msg);
-    if (response.data.stat == 200) {
+    if (response.data.stat === 200) {
       alert("Registered sucessfully");
+      console.log(response.data.usr)
+      localStorage.setItem("currUser", JSON.stringify(response.data.usr));
+      navigator('/')
     } else {
       alert(response.data.msg);
       return;

@@ -1,5 +1,5 @@
 import { useNavigate } from "react-router-dom";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { loginApi } from "../utils/api";
 import axios from "axios";
 
@@ -10,6 +10,14 @@ export default function Login() {
     password: "",
   });
 
+
+  useEffect(() => {
+    const doesUserExist = localStorage.getItem("currUser");
+    if (doesUserExist) {
+      navigator("/")
+    }
+  }, [])
+
   const submintHandler = async (event) => {
     event.preventDefault();
     if (form.name === "" || form.password === "") {
@@ -17,7 +25,13 @@ export default function Login() {
     }
     const response = await axios.post(loginApi, form);
     alert(response.data.msg);
+    if (response.data.status === 200) {
+      console.log(response.data.usr)
+      localStorage.setItem("currUser", JSON.stringify(response.data.usr));
+      navigator("/")
+    }
   };
+
 
   const changeHandler = (e) => {
     const { name, value } = e.target;
@@ -48,3 +62,7 @@ export default function Login() {
     </div>
   );
 }
+
+
+
+

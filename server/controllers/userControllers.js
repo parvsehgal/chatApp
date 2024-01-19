@@ -17,7 +17,8 @@ exports.registerController = async (req, res) => {
         email: email,
         password: hashedPassword,
       });
-      res.status(200).json({ msg: "new user created", stat: 200 });
+      newUser.password = ""
+      res.status(200).json({ msg: "new user created", stat: 200, usr: newUser });
     }
   } catch (err) {
     console.log(err.message);
@@ -30,13 +31,14 @@ exports.loginController = async (req, res) => {
     const { name, password } = req.body;
     const doesUser = await User.findOne({ name: name });
     if (doesUser) {
-      console.log(doesUser);
       const isPasswordCorrect = await bcrypt.compare(
         password,
         doesUser.password
       );
       if (isPasswordCorrect) {
-        res.json({ msg: "login sucessfull", status: 200 });
+        doesUser.password = "";
+        console.log(doesUser)
+        res.json({ msg: "login sucessfull", status: 200, usr: doesUser });
         return;
       } else {
         res.json({ msg: "incorrect password", status: 500 });
@@ -50,3 +52,19 @@ exports.loginController = async (req, res) => {
     res.json({ msg: "error loggin in", status: 500 });
   }
 };
+
+
+exports.getAllContacts = async (req, res) => {
+  try {
+    //const { _id } = req.body;
+    console.log(_id)
+    const contacts = await User.find()
+    res.json(contacts)
+  } catch (err) {
+    console.log(err.message)
+  }
+}
+
+
+
+
