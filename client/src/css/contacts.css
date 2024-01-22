@@ -30,3 +30,13 @@
   margin-top: 10px; 
   margin-left:50px
 }
+.aMessagesender{
+  margin-top: 5px;
+  background-color:#FF6961;
+  margin-left: 450px;
+}
+.aMessagereciever{
+  margin-top: 5px;
+  width: 200px;
+  background-color:lavender;
+}

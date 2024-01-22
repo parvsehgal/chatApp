@@ -36,7 +36,9 @@ export default function Chat() {
   return (
     <div>
       <div>
-        this is the chat page
+        <div className="">
+          this is the chat page
+        </div>
         <Contacts contacts={contacts} changeChat={changeChat} chat={chat} currUser={currUser}></Contacts> </div>
     </div>
   )

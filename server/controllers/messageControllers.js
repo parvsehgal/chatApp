@@ -15,3 +15,25 @@ exports.sendMessage = async (req, res) => {
     console.log(err.message)
   }
 }
+
+exports.getMessages = async (req, res) => {
+  try {
+    const { from, to } = req.body;
+
+    const messages = await Message.find({
+      users: {
+        $all: [from, to],
+      },
+    }).sort({ updatedAt: 1 });
+
+    const projectedMessages = messages.map((msg) => {
+      return {
+        fromSelf: msg.sender.toString() === from,
+        message: msg.message.text,
+      };
+    });
+    res.json(projectedMessages);
+  } catch (err) {
+    console.log(err.message)
+  }
+}

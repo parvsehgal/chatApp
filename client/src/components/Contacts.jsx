@@ -12,7 +12,7 @@ const Contacts = ({ contacts, changeChat, chat, currUser }) => {
   });
   return (
     <div>
-      all contacts
+      Select person to chat with
       <div className="chatPage">
         <div className="contacts">{toDis}</div>
         <div className="side">

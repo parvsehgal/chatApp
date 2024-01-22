@@ -3,6 +3,7 @@ const registerAPi = `${api}/register`;
 const loginApi = `${api}/login`;
 const contactsApi = `${api}/allContacts`
 
+const getMessages = `${api}/getMessages`
 const sendMessage = `${api}/sendMessage`
 
-export { registerAPi, loginApi, contactsApi, sendMessage };
+export { registerAPi, loginApi, contactsApi, sendMessage, getMessages };
