@@ -1,0 +1,32 @@
+.chatPage {
+  display: flex;
+}
+.contacts {
+  background-color: wheat;
+  height: 300px;
+  width: 150px;
+}
+.item {
+  padding: 10px;
+}
+.item:hover {
+  cursor: pointer;
+}
+.side {
+  background-color: wheat;
+  color: black;
+  margin-left: 150px;
+  height: 450px;
+  width: 600px;
+  border-radius: 10px;
+}
+.chatBox{
+  height: 350px;
+  width: 580px;
+  margin-left:10px;
+  background-color:white;
+}
+.messageBox{
+  margin-top: 10px; 
+  margin-left:50px
+}
