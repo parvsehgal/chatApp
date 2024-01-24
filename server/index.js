@@ -3,7 +3,8 @@ const app = express();
 const cors = require("cors");
 const mongoose = require("mongoose");
 const userRoutes = require("./routes/userRoutes");
-const messageRoutes = require("./routes/messageRoutes")
+const messageRoutes = require("./routes/messageRoutes");
+const { Server } = require("socket.io");
 
 require("dotenv").config();
 app.use(cors());
@@ -26,3 +27,19 @@ mongoose
 const server = app.listen(process.env.PORT, () => {
   console.log("server instantiated on port", process.env.PORT);
 });
+
+const io = new Server(server, {
+  cors: {
+    origin: "*"
+  },
+})
+io.on("connection", (socket) => {
+  console.log(socket.id)
+  socket.on("message-sent", (data) => {
+    socket.broadcast.emit("message-recieved", data);
+    data();
+  })
+})
+
+
+
